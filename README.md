@@ -1,6 +1,6 @@
-# MCP Repo Server (GraphQL Version)
+# OpenTelemetry Instrumentation MCP
 
-This is a minimal MCP server that uses GitHub's GraphQL API and REST API to help you instrument your applications with OpenTelemetry.
+This is a minimal server that uses GitHub's GraphQL API and REST API to help you instrument your applications with OpenTelemetry.
 
 ## Usage
 
