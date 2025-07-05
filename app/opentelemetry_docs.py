@@ -7,7 +7,6 @@ def get_docs_by_language(language: str):
     RAW_BASE_URL = "https://raw.githubusercontent.com/open-telemetry/opentelemetry.io/main/content/en/docs/languages"
     language = language.strip().lower()
     raw_url = f"{RAW_BASE_URL}/{language}/getting-started.md"
-    print(f"Fetching raw content from: {raw_url}")
     
     response = requests.get(raw_url)
     

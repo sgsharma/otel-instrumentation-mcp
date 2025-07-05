@@ -5,6 +5,9 @@ from app.opentelemetry_repos import get_opentelemetry_repos
 from app.github_issues import get_repo_issues, search_repo_issues   
 from app.opentelemetry_examples import get_demo_services_doc, get_demo_services_by_language    
 from app.opentelemetry_docs import get_docs_by_language
+from app.code_analysis_prompt import ask_about_code
+from fastmcp.prompts.prompt import Message, PromptMessage, TextContent
+
 
 mcp = FastMCP("Opentelemetry Instrumentation")
 
@@ -13,6 +16,25 @@ mcp_app = mcp.http_app(path='/mcp')
 
 # Create a FastAPI app and mount the MCP server
 app = FastAPI(lifespan=mcp_app.lifespan)
+
+@mcp.prompt
+async def ask_about_code(code_snippet: str) -> PromptMessage:
+    """Ask a question about a code snippet.
+    
+    Generates a user message asking for analysis and OpenTelemetry documentation for a code snippet.
+    
+    Args:
+        code_snippet: The code snippet to analyze and find documentation for
+        
+    Returns:
+        PromptMessage: A formatted message containing the analysis request
+    """
+    message = ask_about_code(code_snippet)
+    return PromptMessage(
+        role="user",
+        content=TextContent(type="text", text=message),
+        messages=[Message(role="user", content=TextContent(type="text", text=message))]
+    )
 
 @mcp.tool
 @app.get("/repos")
