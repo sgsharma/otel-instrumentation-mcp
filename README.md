@@ -23,3 +23,19 @@ Note:
 
 - Set Transport Type to Streamable HTTP
 - Set URL to http://127.0.0.1:8000/mcp-server/mcp/
+
+## Connect and test using Cursor:
+
+Add the following to your `~/.cursor/mcp.json` file or to your local project `mcp.json` file:
+
+```json
+{
+  "mcpServers": {
+    "opentelemetry-mcp": {
+      "url": "http://127.0.0.1:8000/mcp/"
+    }
+  }
+}
+```
+
+This expects the server to be running on port 8000.
