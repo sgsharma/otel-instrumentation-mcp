@@ -6,6 +6,7 @@ from app.github_issues import get_repo_issues, search_repo_issues
 from app.opentelemetry_examples import get_demo_services_doc, get_demo_services_by_language    
 from app.opentelemetry_docs import get_docs_by_language
 from app.code_analysis_prompt import ask_about_code
+from app.custom_instrumentation_prompt import custom_instrumentation_prompt
 from fastmcp.prompts.prompt import Message, PromptMessage, TextContent
 
 
@@ -30,6 +31,25 @@ async def ask_about_code(code_snippet: str) -> PromptMessage:
         PromptMessage: A formatted message containing the analysis request
     """
     message = ask_about_code(code_snippet)
+    return PromptMessage(
+        role="user",
+        content=TextContent(type="text", text=message),
+        messages=[Message(role="user", content=TextContent(type="text", text=message))]
+    )
+
+@mcp.prompt
+async def custom_instrumentation_prompt(code_snippet: str) -> PromptMessage:
+    """Ask a question about a code snippet.
+
+    Generates a user message asking for custom instrumentation updates to the code snippet.
+    
+    Args:
+        code_snippet: The code snippet to analyze and find documentation for
+
+    Returns:
+        PromptMessage: A formatted message containing the custom instrumentation request
+    """
+    message = custom_instrumentation_prompt(code_snippet)
     return PromptMessage(
         role="user",
         content=TextContent(type="text", text=message),
