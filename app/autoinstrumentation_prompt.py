@@ -1,4 +1,4 @@
-def ask_about_code(code_snippet: str) -> str:
+def autoinstrumentation_prompt(code_snippet: str) -> str:
     """Generates a prompt message requesting code analysis and relevant OpenTelemetry documentation.
     
     Args:
@@ -8,13 +8,10 @@ def ask_about_code(code_snippet: str) -> str:
         A prompt string asking for code analysis and documentation
     """
     prompt = (
-        f"Analyze this code snippet:\n\n"
-        f"Part 1 - Code Analysis:\n"
-        f"1. What does this code do?\n"
-        f"Part 2 - Documentation:\n"
-        f"1. Check if there is support for this language in OpenTelemetry\n\n"
+        f"Review the user-provided code snippet and check if there is support for this language in OpenTelemetry:\n\n"
         f"1. If this language is supported in OpenTelemetry, suggest how to autoinstrument this code\n\n"
-        f"2. Always provide URLs to relevant OpenTelemetry documentation for this language\n"
+        f"2. Add tracing, logging, and metrics to the code using OpenTelemetry autoinstrumentation\n"
+        f"3. Always provide URLs to relevant OpenTelemetry documentation for this language\n"
         f"Code snippet:\n{code_snippet}"
     )
 

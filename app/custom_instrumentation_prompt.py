@@ -9,10 +9,10 @@ def custom_instrumentation_prompt(code_snippet: str) -> str:
         A detailed prompt string asking for OpenTelemetry instrumentation additions
     """
     prompt = (
-        "You are an expert in OpenTelemetry instrumentation. Your task is to review and update the "
-        "following code snippet by adding appropriate OpenTelemetry tracing using the SDK for the language "
+        "Review and update the user-provided code snippet by adding appropriate OpenTelemetry tracing using the SDK for the language "
+        "Always fetch the OpenTelemetry docs by language first and use them to guide your instrumentation for the language "
         "used in the snippet (e.g., Python, Java, Node.js, Go, etc.).\n\n"
-        "Please apply the following instrumentation guidelines strictly:\n\n"
+        "Apply the following instrumentation guidelines strictly:\n\n"
         "1. **Custom Span Creation**:\n"
         "   - Create custom spans using the OpenTelemetry API (`start_span`, `with tracer.start_as_current_span`, etc.).\n"
         "   - Add spans inside functions or methods that contain business logic or domain-specific operations.\n"
